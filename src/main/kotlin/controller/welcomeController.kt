@@ -9,11 +9,11 @@ class WelcomeController {
     @GetMapping("/")
     fun welcome(): String {
         return """
-            🍽️ Welcome to QuickBite! 🚀
+            🍽️ Welcome to QuickBite!
 
             Your new favorite food ordering platform.
             Built with Kotlin + Spring Boot.
-            Ready to serve you like Talabat, Deliveroo, and Carriage 🍕🍔🌮
+            Ready to serve you like Talabat, Deliveroo, and Carriage
         """.trimIndent()
     }
 }

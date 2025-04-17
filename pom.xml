@@ -48,11 +48,12 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Spring Security -->
+		<!-- Spring Security (FIXED HERE) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
 
 		<!-- Kotlin support -->
 		<dependency>
