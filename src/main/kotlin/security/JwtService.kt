@@ -1,7 +1,8 @@
-package com.coded.spring.ordering.service
+package com.coded.spring.ordering.security
 
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.util.*
 import javax.crypto.SecretKey
@@ -9,13 +10,21 @@ import javax.crypto.SecretKey
 @Service
 class JwtService {
 
-    private val secretKey: SecretKey = Keys.hmacShaKeyFor("your-256-bit-secret-key-your-256-bit-secret-key".toByteArray())
+    @Value("\${jwt.secret}")
+    private lateinit var secret: String
+
+    @Value("\${jwt.expiration}")
+    private var expiration: Long = 0
+
+    private val secretKey: SecretKey by lazy {
+        Keys.hmacShaKeyFor(secret.toByteArray())
+    }
 
     fun generateToken(username: String): String {
         return Jwts.builder()
             .subject(username)
             .issuedAt(Date())
-            .expiration(Date(System.currentTimeMillis() + 1000 * 60 * 60))
+            .expiration(Date(System.currentTimeMillis() + expiration))
             .signWith(secretKey)
             .compact()
     }
@@ -43,4 +52,4 @@ class JwtService {
             null
         }
     }
-}
+} 
